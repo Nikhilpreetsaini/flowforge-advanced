@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowForge Advanced - Task Manager</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#0d6efd">
+  <!-- Updated description for the advanced version -->
+  <meta name="description" content="FlowForge Advanced is an enhanced task and project management PWA. It supports multiple users, recurring tasks, subtasks, dependencies, time tracking, and calendar view, all offline-first.">
+</head>
+<body>
+  <!-- Authentication Section -->
+  <div id="authSection">
+    <h2>Login to FlowForge Pro</h2>
+    <form id="loginForm">
+      <label>Username
+        <input type="text" id="loginUsername" required>
+      </label>
+      <label>Password
+        <input type="password" id="loginPassword" required>
+      </label>
+      <button type="submit">Login</button>
+    </form>
+    <h3>New User? Register</h3>
+    <form id="registerForm">
+      <label>Username
+        <input type="text" id="registerUsername" required>
+      </label>
+      <label>Password
+        <input type="password" id="registerPassword" required>
+      </label>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+  <!-- Main Application Section -->
+  <div id="appSection" style="display:none;">
+    <header>
+      <h1>FlowForge Advanced</h1>
+      <div class="controls">
+        <button id="calendarBtn" aria-label="Show calendar view">📅 Calendar</button>
+        <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+        <button id="logoutBtn" aria-label="Sign out" style="display:none;">Logout</button>
+        <button id="addTaskBtn" aria-label="Add new task">➕ New Task</button>
+      </div>
+    </header>
+    <main>
+      <aside id="categoryList">
+        <h2>Categories</h2>
+        <ul id="categories"></ul>
+        <button id="addCategoryBtn" aria-label="Add new category">+ Add Category</button>
+      </aside>
+      <section id="taskSection">
+        <div class="filter-bar">
+          <input type="search" id="searchInput" placeholder="Search tasks...">
+          <select id="sortSelect">
+            <option value="dueDate">Sort by Due Date</option>
+            <option value="priority">Sort by Priority</option>
+            <option value="createdAt">Sort by Created</option>
+          </select>
+        </div>
+        <ul id="taskList" class="task-list"></ul>
+      </section>
+      <!-- Calendar Section -->
+      <section id="calendarSection" style="display:none;">
+        <div class="calendar-view">
+          <div class="calendar-nav">
+            <button id="prevMonthBtn" aria-label="Previous month">◀</button>
+            <span id="calendarTitle"></span>
+            <button id="nextMonthBtn" aria-label="Next month">▶</button>
+          </div>
+          <table id="calendarTable"></table>
+          <div id="dateTaskList"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Task Modal -->
+  <div class="modal" id="taskModal" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Task</h2>
+      <form id="taskForm">
+        <label>Title
+          <input type="text" id="taskTitle" required>
+        </label>
+        <label>Description
+          <textarea id="taskDescription" rows="3"></textarea>
+        </label>
+        <label>Due Date
+          <input type="date" id="taskDueDate">
+        </label>
+        <label>Priority
+          <select id="taskPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <label>Category
+          <select id="taskCategory"></select>
+        </label>
+        <!-- Recurrence selector -->
+        <label>Recurrence
+          <select id="taskRecurrence">
+            <option value="">None</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </label>
+        <!-- Dependencies multi-select -->
+        <label>Dependencies
+          <select id="taskDependencies" multiple></select>
+        </label>
+        <!-- Progress slider for manual progress (overridden by subtasks) -->
+        <label>Progress
+          <input type="range" id="taskProgress" min="0" max="100" value="0">
+          <span id="progressValue">0%</span>
+        </label>
+        <label>Notes
+          <textarea id="taskNotes" rows="2"></textarea>
+        </label>
+        <!-- Subtasks container -->
+        <div id="subtaskContainer">
+          <h3>Subtasks</h3>
+          <div id="subtasksList"></div>
+          <button type="button" id="addSubtaskBtn">+ Add Subtask</button>
+        </div>
+        <div class="modal-actions">
+          <button type="submit">Save</button>
+          <button type="button" id="cancelTaskBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div class="modal" id="categoryModal" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <h2>Add Category</h2>
+      <form id="categoryForm">
+        <label>Category Name
+          <input type="text" id="categoryName" required>
+        </label>
+        <div class="modal-actions">
+          <button type="submit">Add</button>
+          <button type="button" id="cancelCategoryBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

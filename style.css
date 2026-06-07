@@ -1,0 +1,399 @@
+/* Base styles */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --accent-color: #0d6efd;
+  --card-bg: #f8f9fa;
+  --modal-bg: rgba(0,0,0,0.5);
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e5e5e5;
+  --card-bg: #1e1e1e;
+  --modal-bg: rgba(0,0,0,0.8);
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--accent-color);
+  color: #fff;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header .controls button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  color: var(--accent-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+main {
+  display: flex;
+  flex: 1;
+}
+
+aside {
+  width: 220px;
+  background: var(--card-bg);
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+aside h2 {
+  margin-top: 0;
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+}
+
+aside li {
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+}
+
+aside li.selected {
+  background: var(--accent-color);
+  color: #fff;
+}
+
+aside button {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#taskSection {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.filter-bar input {
+  flex: 1;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter-bar select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  background: var(--card-bg);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-item h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+}
+
+.task-item p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.task-item .meta {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.task-item .actions button {
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-color);
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--modal-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s;
+  z-index: 100;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-content form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.modal-content form input,
+.modal-content form textarea,
+.modal-content form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-actions button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-actions button:first-child {
+  background: var(--accent-color);
+  color: #fff;
+}
+
+.modal-actions button:last-child {
+  background: #6c757d;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  aside {
+    width: 100%;
+    display: none;
+  }
+  aside.show {
+    display: block;
+  }
+}
+
+/* Authentication forms */
+#authSection {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+#authSection form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+#authSection form label {
+  margin-bottom: 0.5rem;
+}
+#authSection form input {
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#authSection form button {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#authSection h3 {
+  margin-top: 1rem;
+}
+
+/* Calendar view */
+.calendar-view {
+  padding: 1rem;
+}
+.calendar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.calendar-nav button {
+  margin: 0 1rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#calendarTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+#calendarTable th,
+#calendarTable td {
+  border: 1px solid #ccc;
+  text-align: right;
+  padding: 0.5rem;
+  height: 40px;
+}
+#calendarTable td.empty {
+  background: #f5f5f5;
+}
+#calendarTable td:hover {
+  background: var(--card-bg);
+  cursor: pointer;
+}
+#calendarTable .badge {
+  display: inline-block;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 50%;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  margin-left: 4px;
+}
+#dateTaskList {
+  margin-top: 1rem;
+}
+#dateTaskList ul {
+  list-style: none;
+  padding: 0;
+}
+#dateTaskList li {
+  background: var(--card-bg);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Subtask input styles */
+#subtaskContainer h3 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1rem;
+}
+#subtasksList .subtask-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#subtasksList .subtask-row input[type="text"] {
+  flex: 1;
+  margin-right: 0.5rem;
+  padding: 0.25rem;
+}
+#subtasksList .subtask-row input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+#addSubtaskBtn {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+/* Recurrence, dependencies and progress styles */
+#taskDependencies {
+  height: 100px;
+}
+#taskProgress {
+  width: calc(100% - 50px);
+}
+#progressValue {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+/* Progress bar display within task list */
+.progress-bar-container {
+  margin-top: 0.25rem;
+  background: #e9ecef;
+  border-radius: 4px;
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--accent-color);
+  width: 0%;
+}

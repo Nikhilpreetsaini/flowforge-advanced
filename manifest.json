@@ -1,0 +1,21 @@
+{
+  "name": "FlowForge Advanced",
+  "short_name": "FlowForge Adv",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d6efd",
+  "theme_color": "#0d6efd",
+  "description": "An advanced progressive web app for managing tasks and projects offline with multi-user support, recurring tasks, dependencies, subtasks and time tracking.",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
